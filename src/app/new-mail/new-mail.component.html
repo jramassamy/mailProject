@@ -1,0 +1,60 @@
+<div *ngIf="loaded < 1" id="contentLoader">
+  <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+</div>
+<div *ngIf="loaded === 1" id="content">
+  <form id="formMail" #formMail="ngForm">
+    <input type="text" id="myinvisiblefield" />
+    <form class="example-form">
+      <div id="listChoice">
+        <mat-form-field id="matformfield" class="example-full-width">
+          <input type="text" placeholder="Sélectionner vos destinataires" #matInput1 matInput [formControl]="myControl"
+            [matAutocomplete]="auto1">
+          <mat-autocomplete #auto1="matAutocomplete" (optionSelected)="onSelectedParticipant($event)">
+            <mat-option (click)="matInput1.value=''" *ngFor="let participant of participants" [value]="participant">
+              {{participant.name}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </div>
+    </form>
+    <div><span>Choix du format: </span>
+      <select #oldValue="ngModel" [(ngModel)]="selectedOption" (ngModelChange)="onChangeFormat(oldValue)" name="first">
+        <option *ngFor="let option of options" [ngValue]="option.value">{{option.name}}</option>
+      </select>
+    </div>
+    <p>Object</p>
+    <input [(ngModel)]="mailBody.object" id="answerObject" name="answerObject" type="text" placeholder="Objet" required
+      #answerObject="ngModel">
+    <div *ngIf="listSelectedParticipant.length" id="divListParticipant">
+      <p>Destinataire(s) ajouté(s)</p>
+      <div id="boxParticipant">
+        <ng-container *ngFor="let selectedParticipant of listSelectedParticipant; let i = index">
+          <div class="selectedParticipant">
+            {{selectedParticipant.name}}
+          </div>
+        </ng-container>
+      </div>
+    </div>
+    <p>Body</p>
+    <div *ngIf="selectedOption === 'polytech'">
+      <button id="noteBtn" (click)="openModalNote()">Ajouter une note</button>
+    </div>
+    <textarea [(ngModel)]="mailBody.body" id="mailBody" name="mailBody" required #answerBody="ngModel"></textarea>
+    <button type="button" id="submitMail" (click)="onSubmitMail(formMail)">Creer</button>
+    <mat-progress-spinner *ngIf="loadedResult === false" style="margin-top: 10px; margin: 0 auto;" mode="indeterminate">
+    </mat-progress-spinner>
+    <div id="successDiv" *ngIf="loadedResult === true">
+      <div class="animateCheck">
+        <div class="success-checkmark">
+          <div class="check-icon">
+            <span class="icon-line line-tip"></span>
+            <span class="icon-line line-long"></span>
+            <div class="icon-circle"></div>
+            <div class="icon-fix"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+
+</div>

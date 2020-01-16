@@ -1,0 +1,17 @@
+#content {
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    a {
+        height: 30px;
+        font-size: 20px;
+        text-decoration: none;
+        text-transform: uppercase;
+        color: white;
+        margin-left: 10px;
+        margin-right: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}

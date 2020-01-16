@@ -1,0 +1,8 @@
+<div *ngIf="!loaded" id="contentLoader">
+    <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+</div>
+<div *ngIf="loaded" id="content">
+    <ng-container *ngFor="let participant of participants; let i = index">
+        <a (click)="updateUserService(participant.name)" routerLink="/box-mail/{{participant.id}}">{{participant.name}}</a>
+    </ng-container>
+</div>

@@ -1,0 +1,60 @@
+<div *ngIf="loaded < 2" id="contentLoader">
+    <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+</div>
+<div *ngIf="loaded === 2" id="content">
+    <input type="text" id="myinvisiblefield" />
+    <ng-container *ngIf="mail">
+        <mat-form-field id="matformfield" class="example-full-width">
+            <input type="text" placeholder="Ajouter des destinataires" #matInput1 matInput [formControl]="myControl"
+                [matAutocomplete]="auto1">
+            <mat-autocomplete #auto1="matAutocomplete" (optionSelected)="onSelectedParticipant($event)">
+                <mat-option (click)="matInput1.value=''" *ngFor="let participant of participants" [value]="participant">
+                    {{participant.name}}
+                </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+        <div id="divAnswer">
+            <form id="formAnswer" #formAnswer="ngForm">
+                <p>Body</p>
+                <textarea [(ngModel)]="answer.body" id="answerBody" name="answerBody" required
+                    #answerBody="ngModel"></textarea>
+                <button type="button" id="submitAnswer" (click)="onSubmitAnswer(formAnswer)">REPONDRE</button>
+                <div id="absolutePos">
+                    <mat-progress-spinner *ngIf="loadedResult === false"
+                        style="margin: 0 auto; margin-top: 10px; margin-bottom: 10px; height: 100px"
+                        mode="indeterminate">
+                    </mat-progress-spinner>
+                    <div id="successDiv" *ngIf="loadedResult === true">
+                        <div class="animateCheck">
+                            <div class="success-checkmark">
+                                <div class="check-icon">
+                                    <span class="icon-line line-tip"></span>
+                                    <span class="icon-line line-long"></span>
+                                    <div class="icon-circle"></div>
+                                    <div class="icon-fix"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <p>Expéditeur: {{mail.expeditor}}</p>
+        <p>Destinataire(s):</p>
+        <div id="boxParticipant">
+            <ng-container *ngFor="let participant of mail.participants; let i = index">
+                <div class="selectedParticipant">{{participant.name}}</div>
+            </ng-container>
+        </div>
+        <p>Date de création: {{mail.creationDate | date:'medium'}}</p>
+        <p>Objet: {{mail.object}}</p>
+        <p>Premier message: {{mail.historic.messages[mail.historic.messages.length - 1].body.content}}</p>
+        <div id="historicList">
+            <div class="historicMessage"
+                *ngFor="let message of mail.historic.messages | slice:0:mail.historic.messages.length - 1; let i = index">
+                <p>{{message.emitter}}</p>
+                <p>{{message.body.content}}</p>
+            </div>
+        </div>
+    </ng-container>
+</div>

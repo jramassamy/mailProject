@@ -1,0 +1,19 @@
+<div *ngIf="!loaded" id="contentLoader">
+    <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+</div>
+<div *ngIf="loaded" id="content">
+<p id="title" *ngIf="userName">Bienvenue {{userName}}</p>
+<a routerLink="/box-mail/newMail/{{userId}}"> Créer un nouveau mail</a>
+<div id="boxMail">
+<ng-container *ngFor="let mail of listMail; let i = index">
+    <a routerLink="/box-mail/detail/{{userId}}/{{mail.uuid}}">
+        <div class="boxDesign">
+            <p>{{mail.expeditor}}</p>
+            <p>{{mail.object}}</p>
+            <p>{{mail.historic.messages[0].body.content}}</p>
+            <p>{{mail.historic.messages.length}}</p>
+        </div>
+    </a>
+</ng-container>
+</div>
+</div>

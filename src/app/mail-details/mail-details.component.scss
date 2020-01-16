@@ -1,0 +1,94 @@
+p {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+#formAnswer > * {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+#formAnswer {
+  position: relative;
+  padding-left: 5px;
+  padding-right: 5px;
+  border: 1px solid black;
+}
+
+.historicMessage {
+    border: 1px solid black;
+    border-radius: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.selectedParticipant {
+    border: 1px solid black;
+    border-radius: 5px;
+    min-width: 150px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left :10px;
+    margin-right: 10px;
+  }
+
+  #boxParticipant {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+
+  #answerBody {
+    resize: none;
+    max-width: 350px;
+    height: 150px;
+    height: 100px;
+    width: 90%;
+  }
+
+  #submitAnswer {
+    color: #fff;
+    background-color: #28a745;
+    border-color: #28a745;
+    border: none;
+    border-radius: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    text-transform: uppercase;
+    margin-top: 10px;
+    display: block;
+  }
+
+  #myinvisiblefield {
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+  }
+
+#divAnswer {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+#absolutePos {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+#historicList {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
