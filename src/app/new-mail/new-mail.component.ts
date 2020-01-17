@@ -79,11 +79,11 @@ export class NewMailComponent implements OnInit {
     openModalNote() {
       console.log('enter');
       const dialogRef = this.dialog.open(NoteModalComponent, {
-        width: '250px',
-        data: 'hey'
+        width: '250px'
       });
 
       dialogRef.afterClosed().subscribe(result => {
+        console.log('after close', result);
         this.mailBody.body += result;
       });
     }
@@ -101,7 +101,7 @@ export class NewMailComponent implements OnInit {
             this.loadedResult = true;
             setTimeout(() => {
               this.router.navigate([`/box-mail/${this.userId}`]);
-            }, 3000);
+            }, 5000);
           }, (err) => {
             this.loadedResult = null;
             console.log(err);

@@ -6,6 +6,7 @@
     justify-content: center;
     align-items: center;
     flex-grow: 1;
+    flex-direction: column;
 }
 .example-form {
     width: 100%;
@@ -17,6 +18,11 @@
     width: 100%;
   }
 
+  #goBack {
+    padding-top: 10px;
+    color: white;
+    text-decoration: none;
+  }
   .selectedParticipant, .selectedGroup {
     border: 1px solid black;
     border-radius: 5px;

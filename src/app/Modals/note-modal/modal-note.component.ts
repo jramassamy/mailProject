@@ -13,6 +13,6 @@ import { DatePipe } from '@angular/common';
     constructor(public dialogRef: MatDialogRef<NoteModalComponent>,
       @Inject(MAT_DIALOG_DATA) public data: string, public datepipe: DatePipe) { }
       close() {
-        return `<score score="12" base_score="13" subject="UE12" name="course à pied"></score>`;
+        this.dialogRef.close(`<score score="12" base_score="13" subject="UE12" name="course à pied"></score>`);
       }
   }
