@@ -45,6 +45,10 @@ body { font-family: Roboto, "Helvetica Neue", sans-serif !important; }
     align-items: center;
     margin-bottom: 10px;
 }
+
+.mat-form-field-appearance-legacy .mat-form-field-underline {
+  display: none;
+}
 /* http://meyerweb.com/eric/tools/css/reset/
    v2.0-modified | 20110126
    License: none (public domain)

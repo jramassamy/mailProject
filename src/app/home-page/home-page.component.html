@@ -3,6 +3,8 @@
 </div>
 <div *ngIf="loaded" id="content">
     <ng-container *ngFor="let participant of participants; let i = index">
-        <a (click)="updateUserService(participant.name)" routerLink="/box-mail/{{participant.id}}">{{participant.name}}</a>
+        <a class="button" (click)="updateUserService(participant.name)" routerLink="/box-mail/{{participant.id}}">
+            <span>{{participant.name}}</span>
+        </a>
     </ng-container>
 </div>

@@ -8,10 +8,10 @@
 <ng-container *ngFor="let mail of listMail; let i = index">
     <a routerLink="/box-mail/detail/{{userId}}/{{mail.uuid}}">
         <div class="boxDesign">
-            <p>{{mail.expeditor}}</p>
-            <p>{{mail.object}}</p>
-            <p>{{mail.historic.messages[0].body.content}}</p>
-            <p>{{mail.historic.messages.length}}</p>
+            <p>Expéditeur: {{mail.expeditor}}</p>
+            <p>Objet: {{mail.object}}</p>
+            <p>Contenu {{mail.historic.messages[mail.historic.messages.length - 1].body.content}}</p>
+            <p style="text-align: right" *ngIf="mail.historic.messages.length - 1 > 0">{{mail.historic.messages.length - 1 }} réponse(s)</p>
         </div>
     </a>
 </ng-container>

@@ -4,7 +4,9 @@
 
 export const environment = {
   production: false,
-	baseHref: '/'
+  baseHref: '/',
+  // baseAPI: 'http://127.0.0.1:3000/',
+  baseAPI: 'https://mail-server-polytech.herokuapp.com/'
 };
 
 /*

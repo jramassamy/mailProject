@@ -6,6 +6,7 @@ import { Participant, Mail, LightMessage } from '../Models/models';
 import { HttpClient } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NoteModalComponent } from '../Modals/note-modal/modal-note.component';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-new-mail',
@@ -59,7 +60,7 @@ export class NewMailComponent implements OnInit {
   }
 
   loadAllParticipants() {
-    this.http.get<Participant[]>('https://mail-server-polytech.herokuapp.com/participants/all').subscribe(
+    this.http.get<Participant[]>('${environment.baseAPI}participants/all').subscribe(
       (result) => {
         this.participants = result;
         console.log(this.participants);
@@ -95,7 +96,7 @@ export class NewMailComponent implements OnInit {
           this.mailBody.participants.push(participant.id);
         });
         this.mailBody.bodySchema = 'string';
-        this.http.post<Mail>(`https://mail-server-polytech.herokuapp.com/emails/`, this.mailBody).subscribe(
+        this.http.post<Mail>(`${environment.baseAPI}emails/`, this.mailBody).subscribe(
           (result) => {
             this.loadedResult = true;
             setTimeout(() => {

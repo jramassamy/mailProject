@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Participant } from '../Models/models';
 import { UserServiceService } from '../user-service.service';
 import { LOCAL_STORAGE } from '@ng-toolkit/universal';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-home-page',
@@ -22,7 +23,7 @@ export class HomePageComponent implements OnInit {
   }
 
   loadAllParticipants() {
-    this.http.get<Participant[]>('https://mail-server-polytech.herokuapp.com/participants/all').subscribe(
+    this.http.get<Participant[]>(`${environment.baseAPI}participants/all`).subscribe(
       (result) => {
         this.participants = result;
         console.log(this.participants);

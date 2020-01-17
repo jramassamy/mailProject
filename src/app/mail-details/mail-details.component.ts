@@ -5,6 +5,7 @@ import { Mail, LightMessage, Participant } from '../Models/models';
 import { NgForm, FormControl } from '@angular/forms';
 import { UserServiceService } from '../user-service.service';
 import { MatAutocompleteSelectedEvent } from '@angular/material';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-mail-details',
@@ -42,7 +43,7 @@ export class MailDetailsComponent implements OnInit {
   }
 
   loadMail() {
-    this.http.get<Mail>(`https://mail-server-polytech.herokuapp.com/emails/${this.mailUUID}`).subscribe(
+    this.http.get<Mail>(`${environment.baseAPI}emails/${this.mailUUID}`).subscribe(
       (result) => {
         this.mail = result;
         this.answer.uuid = this.mailUUID;
@@ -63,7 +64,7 @@ export class MailDetailsComponent implements OnInit {
     console.log(this.answer);
     if (formAnswer.valid) {
       this.loadedResult = false;
-      this.http.post<Mail>(`https://mail-server-polytech.herokuapp.com/emails/`, this.answer).subscribe(
+      this.http.post<Mail>(`${environment.baseAPI}emails/`, this.answer).subscribe(
         (result) => {
           this.mail = result;
           this.loadedResult = true;
@@ -89,7 +90,7 @@ export class MailDetailsComponent implements OnInit {
   }
 
   loadAllParticipants() {
-    this.http.get<Participant[]>('https://mail-server-polytech.herokuapp.com/participants/all').subscribe(
+    this.http.get<Participant[]>(`${environment.baseAPI}participants/all`).subscribe(
       (result) => {
         this.participants = result;
         console.log(this.participants);

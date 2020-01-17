@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Mail } from '../Models/models';
 import { UserServiceService } from '../user-service.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-box-mail',
@@ -29,7 +30,7 @@ export class BoxMailComponent implements OnInit {
 
   loadMails() {
     console.log('hey');
-    this.http.get<Mail[]>(`https://mail-server-polytech.herokuapp.com/emails/byParticipantName/${this.userName}`).subscribe(
+    this.http.get<Mail[]>(`${environment.baseAPI}emails/byParticipantName/${this.userName}`).subscribe(
       (result) => {
         this.listMail = result;
         console.log(this.listMail);
