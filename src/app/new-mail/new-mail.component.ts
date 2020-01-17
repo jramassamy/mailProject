@@ -20,6 +20,7 @@ export class NewMailComponent implements OnInit {
   participants: Participant[] = [];
   listSelectedParticipant: Participant[] = [];
   loaded = 0;
+  listXMLToParse = [];
   mailBody = {
     uuid: null,
     emitter: '',
@@ -74,6 +75,7 @@ export class NewMailComponent implements OnInit {
 
     onChangeFormat(oldValue: any) {
       console.log(this.selectedOption);
+      this.mailBody.bodySchema = this.selectedOption;
     }
 
     openModalNote() {
@@ -84,7 +86,8 @@ export class NewMailComponent implements OnInit {
 
       dialogRef.afterClosed().subscribe(result => {
         console.log('after close', result);
-        this.mailBody.body += result;
+        this.mailBody.body += result.html;
+        this.listXMLToParse.push(result.xml);
       });
     }
 
@@ -95,18 +98,25 @@ export class NewMailComponent implements OnInit {
         this.listSelectedParticipant.forEach(participant => {
           this.mailBody.participants.push(participant.id);
         });
-        this.mailBody.bodySchema = 'string';
+        this.formatPolytechText();
         this.http.post<Mail>(`${environment.baseAPI}emails/`, this.mailBody).subscribe(
           (result) => {
             this.loadedResult = true;
-            setTimeout(() => {
-              this.router.navigate([`/box-mail/${this.userId}`]);
-            }, 5000);
+            // setTimeout(() => {
+            //   this.router.navigate([`/box-mail/${this.userId}`]);
+            // }, 5000);
           }, (err) => {
             this.loadedResult = null;
             console.log(err);
           }
         );
+      }
+    }
+
+    formatPolytechText() {
+      if (this.listXMLToParse.length === 1) {
+        const regex = /\[.+\]/;
+        this.mailBody.body = this.mailBody.body.replace(regex, this.listXMLToParse[0]);
       }
     }
 }

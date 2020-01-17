@@ -14,9 +14,16 @@ import { DatePipe } from '@angular/common';
       epreuve: '',
       sujet: ''
     }
+    body = {
+      xml: '',
+      html: ''
+    }
     constructor(public dialogRef: MatDialogRef<NoteModalComponent>,
       @Inject(MAT_DIALOG_DATA) public data: string, public datepipe: DatePipe) { }
       close() {
-        this.dialogRef.close(`<score score="12" base_score="13" subject="UE12" name="course à pied"></score>`);
+        // tslint:disable-next-line: max-line-length
+        this.body.xml = `<score score="${this.modal.score}" base_score="${this.modal.scoreMoyen}" subject="${this.modal.sujet}" name="${this.modal.epreuve}"></score>`;
+        this.body.html = `[Score: ${this.modal.score}, Score Moyen: ${this.modal.scoreMoyen} Sujet: ${this.modal.sujet} Nom du sujet: ${this.modal.epreuve}]`;
+        this.dialogRef.close(this.body);
       }
   }
