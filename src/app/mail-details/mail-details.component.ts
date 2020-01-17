@@ -4,8 +4,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Mail, LightMessage, Participant } from '../Models/models';
 import { NgForm, FormControl } from '@angular/forms';
 import { UserServiceService } from '../user-service.service';
-import { MatAutocompleteSelectedEvent } from '@angular/material';
+import { MatAutocompleteSelectedEvent, MatDialog } from '@angular/material';
 import { environment } from 'src/environments/environment';
+import { NoteModalComponent } from '../Modals/note-modal/modal-note.component';
+import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 
 @Component({
   selector: 'app-mail-details',
@@ -21,12 +23,21 @@ export class MailDetailsComponent implements OnInit {
     uuid: '',
     emitter: '',
     body: '',
-    participants: []
+    participants: [],
+    bodySchema: 'string'
   } as LightMessage;
   loaded = 0;
   participants: Participant[] = [];
   loadedResult = null;
-  constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router, private userService: UserServiceService) {
+  selectedOption = 'classique'; // classique ou polytech
+
+  options = [
+    { name: 'Classique', value: 'classique' },
+    { name: 'Polytech', value: 'polytech' }
+  ];
+  listXMLToParse = [];
+  constructor(public dialog: MatDialog, private http: HttpClient,
+    private route: ActivatedRoute, private router: Router, private userService: UserServiceService) {
     this.route.params.subscribe((params) => {
       if (params.participantId) {
         this.userId = params.participantId;
@@ -45,10 +56,14 @@ export class MailDetailsComponent implements OnInit {
   loadMail() {
     this.http.get<Mail>(`${environment.baseAPI}emails/${this.mailUUID}`).subscribe(
       (result) => {
+        result.historic.messages.forEach(
+          (message) => {
+            message.body.content = this.decodeScore(message.body.content);
+          }
+        );
         this.mail = result;
         this.answer.uuid = this.mailUUID;
         this.answer.emitter = this.userId;
-        this.answer.bodySchema = 'string';
         this.mail.participants.forEach(participant => {
           this.answer.participants.push(participant.id);
         });
@@ -64,6 +79,7 @@ export class MailDetailsComponent implements OnInit {
     console.log(this.answer);
     if (formAnswer.valid) {
       this.loadedResult = false;
+      this.formatPolytechText();
       this.http.post<Mail>(`${environment.baseAPI}emails/`, this.answer).subscribe(
         (result) => {
           this.mail = result;
@@ -100,5 +116,38 @@ export class MailDetailsComponent implements OnInit {
         console.log(err);
       }
     );
+  }
+
+  onChangeFormat(oldValue: any) {
+    console.log(this.selectedOption);
+    this.answer.bodySchema = this.selectedOption;
+  }
+
+  openModalNote() {
+    console.log('enter');
+    const dialogRef = this.dialog.open(NoteModalComponent, {
+      width: '250px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('after close', result);
+      this.answer.body += result.html;
+      this.listXMLToParse.push(result.xml);
+    });
+  }
+  formatPolytechText() {
+    if (this.listXMLToParse.length === 1) {
+      const regex = /\[.+\]/;
+      this.answer.body = this.answer.body.replace(regex, this.listXMLToParse[0]);
+    }
+  }
+
+  decodeScore(codedText: string) {
+    console.log(codedText);
+    const regex = /(&lt|<);score.*score(&gt;|>)/;
+    const regex2 = /(&lt|<);group_scores.*group_scores(&gt;|>)/;
+    codedText = codedText.replace(regex, 'balise score not encoded for human yet');
+    // codedText = codedText.replace(regex2, 'balise group_scores not encoded yet');
+    return codedText;
   }
 }

@@ -1,4 +1,6 @@
-
+#content {
+    padding: 0 !important;
+}
 
 #title {
     padding-top: 10px;
@@ -9,29 +11,28 @@
     letter-spacing: 1px;
 }
 
-#content a {
-    padding-top: 5px;
-    padding-bottom: 5px;
-}
 .boxDesign {
     display: flex;
     min-height: 100px;
-    border: 1px solid black;
     border-radius: 3px;
     text-align: left;
     padding: 10px;
     flex-direction: column;
-    max-width: 80%;
     margin: 0 auto;
-    margin-top: 5px;
-    margin-bottom: 5px;
+    border-top: 1px solid rgba(0,0,0, 0.7);
+    border-bottom: 1px solid rgba(0,0,0, 0.7);
+    background: rgba(238, 238, 238, 0.8);
     p {
+        color: black;
         margin-top: 5px;
         margin-bottom: 5px;
         text-decoration: none;
     }
 }
 
+.boxDesign:hover {
+    background: rgba(238, 238, 238, 0.6);
+}
 a {
     text-decoration: none;
     color: white;
@@ -43,3 +44,34 @@ a {
     padding-top: 10px;
     padding-bottom: 10px;
 }
+
+#repRound {
+    border: 2px solid cadetblue;
+    border-radius: 500px;
+    padding: 3px;
+    background: cadetblue;
+    color: white;
+    width: 20px;
+    height: 20px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#createMail {
+    color: #fff;
+    background-color: royalblue;
+    border-color: royalblue;
+    border: none;
+    margin-left: 5px;
+    border-radius: 2px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    text-transform: uppercase;
+    display: block;
+    width: 200px;
+    text-decoration: none;
+    text-align: center;
+  }

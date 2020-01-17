@@ -18,10 +18,29 @@
     width: 100%;
   }
 
-  #goBack {
+  #divBack {
     padding-top: 10px;
-    color: white;
+  }
+  #goBack {
+    color: #fff;
+    background-color: royalblue;
+    border-color: royalblue;
+    border: none;
+    margin-left: 5px;
+    border-radius: 2px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    text-transform: uppercase;
+    display: block;
+    width: 250px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-decoration: none;
+    text-align: center;
   }
   .selectedParticipant, .selectedGroup {
     border: 1px solid black;

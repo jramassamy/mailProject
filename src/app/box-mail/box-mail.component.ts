@@ -31,6 +31,13 @@ export class BoxMailComponent implements OnInit {
   loadMails() {
     this.http.get<Mail[]>(`${environment.baseAPI}emails/byParticipantName/${this.userName}`).subscribe(
       (result) => {
+        result.forEach((mail) => {
+          mail.historic.messages.forEach(
+            (message) => {
+              message.body.content = this.decodeScore(message.body.content);
+            }
+          );
+        });
         this.listMail = result;
         console.log(this.listMail);
         this.loaded = true;
@@ -39,5 +46,14 @@ export class BoxMailComponent implements OnInit {
         console.log(err);
       }
     );
+  }
+
+  decodeScore(codedText: string) {
+    console.log(codedText);
+    const regex = /(&lt|<);score.*score(&gt;|>)/;
+    const regex2 = /(&lt|\<)group_scores\>(.+)group_scores(&gt;|\>)/;
+    codedText = codedText.replace(regex, 'balise score not encoded for human yet');
+    // codedText = codedText.replace(regex2, 'balise group_scores not encoded yet');
+    return codedText;
   }
 }

@@ -2,9 +2,91 @@
     <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
 </div>
 <div *ngIf="loaded === 2" id="content">
+    <div id="divBack">
+        <a id="goBack" routerLink="/box-mail/{{userId}}">Retour à ma messagerie</a>
+    </div>
     <input type="text" id="myinvisiblefield" />
     <ng-container *ngIf="mail">
-        <mat-form-field id="matformfield" class="example-full-width">
+        <div id="expediteurData">
+        <p>Premier message: {{mail.historic.messages[mail.historic.messages.length - 1].body.content}}</p>
+        <p>Expéditeur: {{mail.expeditor}}</p>
+        <div id="divDestinataire">Destinataire(s):
+            <ng-container *ngFor="let selectedParticipant of mail.participants; let i = index">
+                <div class="selectedParticipant">
+                    {{selectedParticipant.name}}
+                </div>
+            </ng-container>
+        </div>
+        <p>Date de création: {{mail.creationDate | date:'medium'}}</p>
+        <p>Objet: {{mail.object}}</p>
+    </div>
+        <div id="divNewMsg">
+            <p id="nouveauMessage">Répondre au Message</p>
+            <div id="renderParticipant">
+                <form class="example-form">
+                    <div id="listChoice">
+                        <mat-form-field id="matformfield" class="example-full-width">
+                            <input type="text" placeholder="" #matInput1 matInput [formControl]="myControl"
+                                [matAutocomplete]="auto1">
+                            <mat-autocomplete #auto1="matAutocomplete" (optionSelected)="onSelectedParticipant($event)">
+                                <mat-option (click)="matInput1.value=''" *ngFor="let participant of participants"
+                                    [value]="participant">
+                                    {{participant.name}}
+                                </mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+                    </div>
+                </form>
+                <div id="boxParticipant">
+                    <p *ngIf="answer.participants.length === 0" style=" margin-left: 10px; color: black; opacity: 0.6;">
+                        Ajouter vos destinataires</p>
+                    <ng-container *ngFor="let selectedParticipant of mail.participants; let i = index">
+                        <div class="selectedParticipant">
+                            {{selectedParticipant.name}}
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+            <!-- <div id="inputDiv">
+              <input [(ngModel)]="answer.object" id="answerObject" name="answerObject" type="text" placeholder="Objet" required
+              #answerObject="ngModel">
+            </div> -->
+            <div id="choiceFormatDiv">
+                <div><span>Choix du format </span>
+                    <select #oldValue="ngModel" [(ngModel)]="selectedOption" (ngModelChange)="onChangeFormat(oldValue)"
+                        name="first">
+                        <option *ngFor="let option of options" [ngValue]="option.value">{{option.name}}</option>
+                    </select>
+                </div>
+                <div *ngIf="selectedOption === 'polytech'">
+                    <button id="noteBtn" (click)="openModalNote()">Ajouter une note</button>
+                </div>
+            </div>
+            <form id="formAnswer" #formAnswer="ngForm">
+                <div id="textareaDiv">
+                    <textarea placeholder="Message" [(ngModel)]="answer.body" id="mailBody" name="mailBody" required
+                        #answerBody="ngModel"></textarea>
+                </div>
+                <div id="divCrea">
+                    <button type="button" id="submitMail" (click)="onSubmitAnswer(formAnswer)">ENVOYER</button>
+                </div>
+            </form>
+        </div>
+        <mat-progress-spinner *ngIf="loadedResult === false" style="margin: 0 auto; margin-top: 10px;" mode="indeterminate">
+        </mat-progress-spinner>
+        <div id="successDiv" *ngIf="loadedResult === true">
+          <div class="animateCheck">
+            <div class="success-checkmark">
+              <div class="check-icon">
+                <span class="icon-line line-tip"></span>
+                <span class="icon-line line-long"></span>
+                <div class="icon-circle"></div>
+                <div class="icon-fix"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- <mat-form-field id="matformfield" class="example-full-width">
             <input type="text" placeholder="Ajouter des destinataires" #matInput1 matInput [formControl]="myControl"
                 [matAutocomplete]="auto1">
             <mat-autocomplete #auto1="matAutocomplete" (optionSelected)="onSelectedParticipant($event)">
@@ -12,8 +94,8 @@
                     {{participant.name}}
                 </mat-option>
             </mat-autocomplete>
-        </mat-form-field>
-        <div id="divAnswer">
+        </mat-form-field> -->
+        <!-- <div id="divAnswer">
             <form id="formAnswer" #formAnswer="ngForm">
                 <p>Body</p>
                 <textarea [(ngModel)]="answer.body" id="answerBody" name="answerBody" required
@@ -38,18 +120,9 @@
                     </div>
                 </div>
             </form>
-        </div>
-        <p>Expéditeur: {{mail.expeditor}}</p>
-        <p>Destinataire(s):</p>
-        <div id="boxParticipant">
-            <ng-container *ngFor="let participant of mail.participants; let i = index">
-                <div class="selectedParticipant">{{participant.name}}</div>
-            </ng-container>
-        </div>
-        <p>Date de création: {{mail.creationDate | date:'medium'}}</p>
-        <p>Objet: {{mail.object}}</p>
-        <p>Premier message: {{mail.historic.messages[mail.historic.messages.length - 1].body.content}}</p>
-        <div id="historicList">
+        </div> -->
+
+        <div id="historicList" *ngIf="mail.historic.messages.length -1 > 0">
             <div class="historicMessage"
                 *ngFor="let message of mail.historic.messages | slice:0:mail.historic.messages.length - 1; let i = index">
                 <p>{{message.emitter}}</p>

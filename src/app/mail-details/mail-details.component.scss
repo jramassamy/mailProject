@@ -1,23 +1,26 @@
+#content {
+  padding: 0 !important;
+}
 p {
     padding-top: 5px;
     padding-bottom: 5px;
 }
-#formAnswer > * {
-    margin-top: 5px;
-    margin-bottom: 5px;
+
+.example-form {
+  width: 100%;
+  margin: 0 auto;
+  position: absolute;
 }
-#formAnswer {
-  position: relative;
-  padding-left: 5px;
-  padding-right: 5px;
-  border: 1px solid black;
+
+.example-full-width {
+  width: 100%;
 }
 
 .historicMessage {
-    border: 1px solid black;
-    border-radius: 5px;
-    margin-top: 5px;
-    margin-bottom: 5px;
+  border-top: 1px solid rgba(0,0,0, 0.3);
+  border-bottom: 1px solid rgba(0,0,0, 0.3);
+  background: rgba(238, 238, 238, 0.7);
+  padding-left: 5px;
 }
 
 .selectedParticipant {
@@ -28,6 +31,8 @@ p {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 5px;
+    margin-bottom: 5px;
     margin-left :10px;
     margin-right: 10px;
   }
@@ -36,8 +41,8 @@ p {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    margin-top: 5px;
-    margin-bottom: 5px;
+    pointer-events: none;
+    flex-wrap: wrap;
   }
 
   #answerBody {
@@ -89,6 +94,152 @@ p {
 }
 
 #historicList {
-  padding-top: 10px;
-  padding-bottom: 10px;
+  margin-top: 10px;
+  border-top: 1px solid rgba(0,0,0, 0.3);
+  border-bottom: 1px solid rgba(0,0,0, 0.3);
+  p {
+    color: black;
+  }
+}
+
+
+#submitMail {
+  color: #fff;
+  background-color: rgb(2,105,164);
+  border-color: rgb(2,105,164);
+  border: none;
+  border-radius: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  text-transform: uppercase;
+  display: block;
+}
+
+#matformfield {
+  margin: 0 auto;
+}
+
+#listChoice {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  > * {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+}
+
+#mailBody {
+  resize: none;
+  min-height: 150px;
+  width: 100%;
+  border: none;
+  padding: 0;
+}
+
+#noteBtn {
+  color: #fff;
+  background-color: rgb(2, 154, 88);
+  border-color: rgb(2, 154, 88);
+  border: none;
+  margin-left: 10px;
+  border-radius: 2px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  text-transform: uppercase;
+  display: block;
+}
+
+#nouveauMessage {
+  background: rgb(64,64,64);
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  color: white;
+  font-weight: 500;
+  text-transform: uppercase;
+  padding-left: 10px;
+}
+
+#divNewMsg {
+  max-width: 690px;
+  width: 90%;
+  margin: 0 auto;
+  background: white;
+}
+
+#renderParticipant {
+position: relative;
+min-height: 50px;
+display: flex;
+align-items: center;
+}
+
+#answerObject {
+border: none;
+min-height: 50px;
+margin-left: 10px;
+}
+
+#inputDiv {
+border-top: 1px solid rgba(0,0,0, 0.3);
+border-bottom: 1px solid rgba(0,0,0, 0.3);
+}
+#textareaDiv {
+padding-top: 5px;
+padding-left: 10px;
+}
+
+#divCrea {
+background: rgb(245,245,245);
+border-top: 1px solid rgba(0,0,0, 0.3);
+display: flex;
+align-items: center;
+justify-content: flex-start;
+padding-left: 10px;
+height: 50px;
+}
+#choiceFormatDiv {
+display: flex;
+align-items: center;
+height: 50px;
+padding-left:10px;
+border-bottom: 1px solid rgba(0,0,0, 0.3);
+}
+
+#goBack {
+  color: #fff;
+  background-color: royalblue;
+  border-color: royalblue;
+  border: none;
+  border-radius: 2px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  text-transform: uppercase;
+  display: block;
+  width: 260px;
+  text-decoration: none;
+  text-align: center;
+}
+
+#expediteurData {
+  margin-left: 5px;
+  color: white;
+}
+
+#divBack {
+  padding-top: 5px;
+  padding-left: 5px;
+}
+
+#divDestinataire {
+  display: flex;
+  align-items: center;
 }

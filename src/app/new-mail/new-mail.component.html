@@ -2,7 +2,9 @@
   <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
 </div>
 <div *ngIf="loaded === 1" id="content">
-  <a id="goBack" routerLink="/box-mail/{{userId}}">Retourner à ma messagerie</a>
+  <div id="divBack">
+  <a id="goBack" routerLink="/box-mail/{{userId}}">Retour à ma messagerie</a>
+</div>
   <form id="formMail" #formMail="ngForm">
   <input type="text" id="myinvisiblefield" />
   <div id="divNewMsg">
