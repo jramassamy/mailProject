@@ -13,10 +13,6 @@ import { DatePipe } from '@angular/common';
     constructor(public dialogRef: MatDialogRef<NoteModalComponent>,
       @Inject(MAT_DIALOG_DATA) public data: string, public datepipe: DatePipe) { }
       close() {
-        // let date =this.datepipe.transform(this.date, 'fullDate');
-        // this.dialogRef.close(`<div data-type="date">
-        // <img src='./assets/Calendar_Green.png' style="width: 100px; height: auto;"/>
-        // <p>${date}</p>
-        // </div>`);
+        return `<score score="12" base_score="13" subject="UE12" name="course à pied"></score>`;
       }
   }

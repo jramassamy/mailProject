@@ -1,8 +1,11 @@
-<div id="test" (click)="close()">
-    <mat-form-field>
-        <input matInput [(ngModel)]="date" [matDatepicker]="picker" placeholder="Choose a date">
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
-    Bob
+<div id="test">
+    <p>Score:</p>
+    <input type="number" placeholder="score">
+    <p>Score Moyen:</p>
+    <input type="number" placeholder="score">
+    <p>Sujet:</p>
+    <input type="text">
+    <p>Nom:</p>
+    <input type="text">
+    <button (click)="close()">Envoyer</button>
 </div>

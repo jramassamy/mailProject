@@ -60,7 +60,7 @@ export class NewMailComponent implements OnInit {
   }
 
   loadAllParticipants() {
-    this.http.get<Participant[]>('${environment.baseAPI}participants/all').subscribe(
+    this.http.get<Participant[]>(`${environment.baseAPI}participants/all`).subscribe(
       (result) => {
         this.participants = result;
         console.log(this.participants);
@@ -84,7 +84,7 @@ export class NewMailComponent implements OnInit {
       });
 
       dialogRef.afterClosed().subscribe(result => {
-        console.log('The dialog was closed', result);
+        this.mailBody.body += result;
       });
     }
 
