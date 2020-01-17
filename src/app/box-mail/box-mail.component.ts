@@ -29,7 +29,6 @@ export class BoxMailComponent implements OnInit {
   }
 
   loadMails() {
-    console.log('hey');
     this.http.get<Mail[]>(`${environment.baseAPI}emails/byParticipantName/${this.userName}`).subscribe(
       (result) => {
         this.listMail = result;

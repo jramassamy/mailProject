@@ -8,8 +8,12 @@ import { DatePipe } from '@angular/common';
     styleUrls: ['./modal-note.component.scss']
   })
   export class NoteModalComponent {
-
-    date: Date;
+    modal = {
+      score: null,
+      scoreMoyen: null,
+      epreuve: '',
+      sujet: ''
+    }
     constructor(public dialogRef: MatDialogRef<NoteModalComponent>,
       @Inject(MAT_DIALOG_DATA) public data: string, public datepipe: DatePipe) { }
       close() {

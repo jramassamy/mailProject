@@ -1,11 +1,11 @@
-<div id="test">
+<div id="modal">
     <p>Score:</p>
-    <input type="number" placeholder="score">
+    <input  [(ngModel)]="modal.score" type="number">
     <p>Score Moyen:</p>
-    <input type="number" placeholder="score">
+    <input [(ngModel)]="modal.scoreMoyen" type="number">
     <p>Sujet:</p>
-    <input type="text">
-    <p>Nom:</p>
-    <input type="text">
+    <input [(ngModel)]="modal.sujet" type="text">
+    <p>Nom de l'épreuve:</p>
+    <input [(ngModel)]="modal.epreuve" type="text">
     <button (click)="close()">Envoyer</button>
 </div>
