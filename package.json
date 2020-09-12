@@ -53,7 +53,7 @@
     "express": "^4.17.1",
     "fs": "0.0.1-security",
     "hammerjs": "^2.0.8",
-    "node-fetch": "^2.6.0",
+    "node-fetch": "^2.6.1",
     "rxjs": "~6.4.0",
     "tinymce": "^5.1.2",
     "tslib": "^1.9.0",
